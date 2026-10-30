@@ -4,7 +4,7 @@ A real-time cricket match companion that combines ball-by-ball simulation, fanta
 
 ## The Problem
 
-Cricket fans juggle multiple apps during live matches — one for scores, another for fantasy, a third for analysis. There's no single experience that combines real-time match data with intelligent, context-aware commentary and fantasy insights.
+During a live cricket match, fans switch between 3-4 apps just to keep up — one for scores, one for fantasy, one for stats. There's no single place where you can watch the match unfold, track your fantasy team, and ask questions about what's happening — all in one screen.
 
 ## What CricAI Does
 
@@ -15,6 +15,7 @@ Cricket fans juggle multiple apps during live matches — one for scores, anothe
 - **Auto-Generated Insights** — Key moments (wickets, milestones, phase changes) trigger AI insight cards
 - **Interactive Scorecard** — Full batting and bowling stats with player images
 - **Mobile-First Design** — Responsive layout with draggable chat panel, tab navigation, sticky controls
+
 
 ## Tech Stack
 
@@ -39,7 +40,7 @@ Cricket fans juggle multiple apps during live matches — one for scores, anothe
 
 ```bash
 # Clone
-git clone https://github.com/Himanshu-Singh-Firke/cricai.git
+git clone https://github.com/himanshu-firke/cricai.git
 cd cricai
 
 # Install dependencies
@@ -61,10 +62,11 @@ CLIENT_URL=http://localhost:5173
 
 ```bash
 # Terminal 1 — Backend
-cd server && node server.js
+cd server  
+node server.js
 
 # Terminal 2 — Frontend
-cd client && npm run dev
+cd client  npm run dev
 ```
 
 Open `http://localhost:5173`
