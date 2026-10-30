@@ -8,7 +8,7 @@ export function useSocket() {
   const [syncState, setSyncState] = useState(null);
 
   useEffect(() => {
-    const url = import.meta.env.PROD ? "" : "http://localhost:3001";
+    const url = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? "" : "http://localhost:3001");
     const socket = io(url, {
       transports: ["websocket", "polling"],
       reconnectionAttempts: 5,
