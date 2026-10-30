@@ -13,9 +13,10 @@ const MatchEvent = require("./models/MatchEvent");
 const app = express();
 const server = http.createServer(app);
 
+const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: clientUrl === "*" ? true : clientUrl,
     methods: ["GET", "POST"],
   },
 });
@@ -53,7 +54,11 @@ const insightLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+const fs = require("fs");
+const clientDist = path.join(__dirname, "../client/dist");
+if (fs.existsSync(clientDist)) {
+  app.use(express.static(clientDist));
+}
 
 // ─── Helper: Classify question category ───
 function classifyQuestion(msg) {
@@ -290,10 +295,13 @@ io.on("connection", (socket) => {
   });
 });
 
-// ─── Serve React App ───
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
+// ─── Serve React App (only if built locally) ───
+const indexPath = path.join(__dirname, "../client/dist/index.html");
+if (fs.existsSync(indexPath)) {
+  app.get("*", (req, res) => {
+    res.sendFile(indexPath);
+  });
+}
 
 // ─── Start Server ───
 server.listen(PORT, () => {
